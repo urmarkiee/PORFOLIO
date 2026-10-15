@@ -185,6 +185,55 @@ html[data-theme="slate"]{color-scheme:light;--bg:#e7eeee;--bg2:#dbe8e8;--surface
 .skills-showcase .skill-group:hover .brand-logo,.skills-showcase .skill-group.is-current .brand-logo{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 24px var(--soft),0 0 0 1px var(--accent)}
 .skills-showcase .skill-group:hover .brand-logo img{transform:scale(1.10)}
 @media(max-width:760px){.skills-showcase .skill-badge.brand-logo{padding:10px}}
+
+/* Full-page engineering atmosphere — formerly limited to the hero/profile card. */
+html { background:var(--bg); }
+body {
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 42% at 47% 0%,var(--soft),transparent 78%),
+    radial-gradient(ellipse 50% 40% at 100% 60%,var(--soft),transparent 82%),
+    linear-gradient(115deg,var(--surface) 0%,var(--bg2) 55%,var(--surface) 100%);
+  background-attachment:fixed;
+  background-repeat:no-repeat;
+}
+body::before {
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.38;
+  background-image:
+    linear-gradient(90deg,transparent calc(100% - 1px),var(--line) 0),
+    linear-gradient(transparent calc(100% - 1px),var(--line) 0);
+  background-size:47px 47px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),rgba(0,0,0,.35) 65%,transparent);
+}
+/* The site content remains above the decorative page background. */
+.main {position:relative;z-index:1}
+/* Remove the hero's separate panel and reuse its atmosphere across the entire page. */
+.hero {
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  overflow:visible;
+  isolation:auto;
+}
+.hero::before,.hero::after { content:none;display:none; }
+/* Keep the hero's circuit corners subtle without a box outline. */
+.hero .circuit {opacity:.48}
+@media(max-width:780px) {
+  .hero {padding-top:35px;padding-bottom:28px}
+  .hero .circuit {display:none}
+}
+@media(max-width:600px) {
+  body {background-attachment:scroll}
+  body::before {background-size:36px 36px;opacity:.24}
+  .hero {padding:26px 12px 28px}
+}
+
 </style>
 </head>
 <body>
